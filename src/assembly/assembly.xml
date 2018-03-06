@@ -7,21 +7,13 @@
     </formats>
     <fileSets>
         <fileSet>
-            <directory>/</directory>
-            <outputDirectory>/</outputDirectory>
-            <includes>
-                <include>README.md</include>
-                <include>COPYING.txt</include>
-            </includes>
-        </fileSet>
-        <fileSet>
             <directory>src/assembly/scripts</directory>
-            <outputDirectory>/bin</outputDirectory>
+            <outputDirectory>bin</outputDirectory>
             <fileMode>755</fileMode>
         </fileSet>
         <fileSet>
             <directory>${project.build.directory}</directory>
-            <outputDirectory>/lib</outputDirectory>
+            <outputDirectory>lib</outputDirectory>
             <includes>
                 <include>tprofiler.jar</include>
             </includes>
@@ -30,8 +22,12 @@
     <files>
         <file>
             <source>src/main/resources/profile.properties</source>
-            <outputDirectory>/</outputDirectory>
-            <destName>profile-example.properties</destName>
+            <outputDirectory>conf</outputDirectory>
+            <destName>profile.properties</destName>
+        </file>
+	<file>
+		<source>README.md</source>
+		<outputDirectory>doc</outputDirectory>
         </file>
     </files>
 </assembly>
