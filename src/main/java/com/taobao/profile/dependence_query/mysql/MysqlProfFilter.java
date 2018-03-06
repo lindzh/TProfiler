@@ -15,6 +15,11 @@ public class MysqlProfFilter extends ProfFilter {
         includePackage.add(MysqlPath.toLowerCase());
     }
 
+    public static boolean isMysqlQuery(String className){
+        String icaseName = className.toLowerCase().replace('.', '/');
+        return icaseName.startsWith(MysqlPath);
+    }
+
     public static MysqlProfFilter getInstance(){
         return instance;
     }

@@ -81,7 +81,7 @@ public class ProfClassAdapter extends ClassVisitor {
      * @see org.objectweb.asm.ClassAdapter#visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])
      */
     public MethodVisitor visitMethod(int arg, String name, String descriptor, String signature, String[] exceptions) {
-        if (Manager.isIgnoreGetSetMethod()) {
+	if (Manager.isIgnoreGetSetMethod()) {
             if (fieldNameList.contains(name)) {
                 return super.visitMethod(arg, name, descriptor, signature, exceptions);
             }
@@ -92,6 +92,9 @@ public class ProfClassAdapter extends ClassVisitor {
         }
 
         MethodVisitor mv = super.visitMethod(arg, name, descriptor, signature, exceptions);
+	if(Manager.instance().isDebugMode()){
+		System.out.println(" ---- ProfClassAdapter TProfiler method Debug " + mClassName+":"+name);
+	}
         return new ProfMethodAdapter(mv, mFileName, mClassName, name);
     }
 

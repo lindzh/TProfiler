@@ -79,10 +79,12 @@ public class ProfTransformer implements ClassFileTransformer {
             return classfileBuffer;
         }
 
-        //如果可以注入mysql成功；则不再继续注入
-        byte[] temp = transform4Mysql(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
-        if (temp != null) {
-            return temp;
+        if(MysqlProfFilter.isMysqlQuery(className)){
+            //如果可以注入mysql成功；则不再继续注入
+            byte[] temp = transform4Mysql(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
+            if (temp != null) {
+                return temp;
+            }
         }
 
         if (!ProfFilter.isNeedInject(className)) {
